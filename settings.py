@@ -37,3 +37,15 @@ OFFSET_X = 40
 RESUME_BUTTON_COORDINATES = (SCREEN_WIDTH//2 - OFFSET_X, SCREEN_HEIGHT//6)
 RESTART_BUTTON_COORDINATES = (SCREEN_WIDTH//2 - OFFSET_X, SCREEN_HEIGHT//2.4)
 EXIT_BUTTON_COORDINATES = (SCREEN_WIDTH//2 - OFFSET_X, SCREEN_HEIGHT//1.5)
+
+# Game colors
+COLORS = {
+    0: 'pink',
+    1: 'red',
+    2: 'green',
+    3: 'cyan',
+    4: 'orange',
+    5: 'yellow',
+    6: 'purple',
+    7: 'blue'
+}
