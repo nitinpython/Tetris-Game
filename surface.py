@@ -1,5 +1,4 @@
 import pygame as pg
-from pygame.locals import *
 
 
 # Base class to create game, preview and score surfaces
