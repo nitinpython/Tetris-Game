@@ -9,11 +9,11 @@ class GameSurface(Surface):
         super().__init__(parent_screen, width, height, x, y)
 
         # Creating grid object
-        self.grid = Grid(self.surface, ROWS, COLUMNS, BLOCK_SIZE)
+        self.grid = Grid()
 
 
     # Calls all the necessary methods of the GameSurface class
     def run(self):
         self.draw()
-        self.grid.draw()
+        self.grid.draw(self.surface)
         
