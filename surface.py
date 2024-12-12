@@ -14,4 +14,4 @@ class Surface:
 
     def draw(self):
         self.parent_screen.blit(self.surface, (self.x, self.y))
-        pass
+        
