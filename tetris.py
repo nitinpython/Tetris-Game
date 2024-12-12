@@ -87,6 +87,18 @@ class Tetris:
                 if event.key == K_SPACE:
                     self.playing = False
 
+                # Check for user input only if the game is running
+                if self.playing:
+
+                    if event.key == K_LEFT:
+                        self.game_surface.move_left()
+                    
+                    elif event.key == K_RIGHT:
+                        self.game_surface.move_right()
+                    
+                    elif event.key == K_DOWN:
+                        self.game_surface.move_down()
+
     
     def run(self):
 

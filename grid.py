@@ -22,6 +22,14 @@ class Grid:
             print()
 
 
+    # Check if a pos is inside the game surface
+    def is_inside(self, pos:pg.Vector2):
+        if pos.x < self.rows and pos.y in range(0, self.columns):
+            return True
+        
+        return False
+    
+    
     def draw(self, parent_screen: pg.Surface):
 
         for row in range(self.rows):
