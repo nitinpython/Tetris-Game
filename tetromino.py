@@ -33,6 +33,24 @@ class Tetromino:
         return new_positions
 
     
+    def rotate(self):
+        if self.rotation_state < len(self.blocks_positions) - 1:
+            self.rotation_state += 1
+
+        # Reset the rotation state if it is equal to 3
+        else:
+            self.rotation_state = 0
+
+
+    def undo_rotate(self):
+        if self.rotation_state > 0:
+            self.rotation_state -= 1
+
+        # Set rotation state to 3 if it is equal to 0
+        else:
+            self.rotation_state = len(self.blocks_positions) - 1
+
+    
     # Draw tetromino on the Game Surface
     def draw(self, parent_screen:pg.Surface):
         positions = self.get_cell_positions()

@@ -99,6 +99,9 @@ class Tetris:
                     elif event.key == K_DOWN:
                         self.game_surface.move_down()
 
+                    elif event.key == K_UP:
+                        self.game_surface.rotate()
+
     
     def run(self):
 

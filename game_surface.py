@@ -70,6 +70,13 @@ class GameSurface(Surface):
 
         if not self.tetromino_is_inside():              
             self.current_tetromino.move((-1, 0))
+
+
+    def rotate(self):
+        self.current_tetromino.rotate()
+
+        if not self.tetromino_is_inside():
+            self.current_tetromino.undo_rotate()
     
     
     # Calls all the necessary methods of the GameSurface class
