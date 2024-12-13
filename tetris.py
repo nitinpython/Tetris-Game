@@ -14,6 +14,13 @@ class Tetris:
         # Constants
         self.playing = True
 
+        # Clock object
+        self.clock = pg.time.Clock()
+
+        # Game timer
+        self.GAME_UPDATE = pg.USEREVENT
+        pg.time.set_timer(self.GAME_UPDATE, GAME_SPEED)
+
         # Loading images
         self.IMAGES = self.load_images()
 
@@ -80,33 +87,39 @@ class Tetris:
             if event.type == QUIT:
                 self.close_game_window()
 
-            # Keyboard event
-            elif event.type == KEYDOWN:
+            # Check for user input only if the game is running
+            if self.playing:
                 
-                # Pause the game
-                if event.key == K_SPACE:
-                    self.playing = False
-
-                # Check for user input only if the game is running
-                if self.playing:
-
-                    if event.key == K_LEFT:
-                        self.game_surface.move_left()
+                # Control game speed through the game timer
+                if event.type == self.GAME_UPDATE:
+                    self.game_surface.move_down()           # Gravity
+            
+                # Keyboard event
+                if event.type == KEYDOWN:
                     
+                    # Pause the game
+                    if event.key == K_SPACE:
+                        self.playing = False
+
+                    elif event.key == K_LEFT:
+                        self.game_surface.move_left()
+                        
                     elif event.key == K_RIGHT:
                         self.game_surface.move_right()
-                    
+                        
                     elif event.key == K_DOWN:
                         self.game_surface.move_down()
 
                     elif event.key == K_UP:
                         self.game_surface.rotate()
 
-    
+ 
     def run(self):
 
         while True:
 
+            self.clock.tick(FPS)
+            
             self.event_handler()
 
             self.SCREEN.fill(BG_COLOR)                  # Refresh the screen
