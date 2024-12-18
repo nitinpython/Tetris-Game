@@ -90,6 +90,9 @@ class GameSurface(Surface):
         self.current_tetromino = self.next_tetromino
         self.next_tetromino = self.get_random_tetromino()
 
+        # Clear rows if full
+        self.grid.clear_full_rows()
+
 
     # Method to check tetrominos overlapping
     def tetromino_fits(self):
