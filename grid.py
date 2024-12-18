@@ -31,6 +31,14 @@ class Grid:
         return False
     
     
+    # Check if a tetromino already exist at a perticular position or not (to avoid overlapping)
+    def is_empty(self, pos: Position):
+        if self.grid[pos.row][pos.column] == 0:
+            return True
+        
+        return False
+    
+    
     def draw(self, parent_screen: pg.Surface):
 
         for row in range(self.rows):

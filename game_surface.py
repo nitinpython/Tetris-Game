@@ -22,18 +22,14 @@ class GameSurface(Surface):
 
 
     # Return a random tetromino block object from the tetrominos object list
-    def get_random_tetromino(self):
-        
-        # Create a copy to prevent modifying original list
-        tetrominos = self.tetrominos.copy()         
+    def get_random_tetromino(self):        
 
         # If the list is empty, fill it again
-        if not len(tetrominos):
-            del tetrominos                          # Delete the object to clear memory
-            tetrominos = self.tetrominos.copy()             # Create new copy
+        if not len(self.tetrominos):
+            self.tetrominos = [TBlock(), LBlock(), JBlock(), SBlock(), ZBlock(), IBlock(), OBlock()]
 
-        tetromino = choice(tetrominos)             # Choose a random tetromino 
-        tetrominos.remove(tetromino)           # Remove the chosen tetromino from the list to avoid repetition
+        tetromino = choice(self.tetrominos)             # Choose a random tetromino 
+        self.tetrominos.remove(tetromino)           # Remove the chosen tetromino from the list to avoid repetition
 
         return tetromino
 
@@ -54,30 +50,56 @@ class GameSurface(Surface):
     def move_left(self):
         self.current_tetromino.move(Position(0, -1))
 
-        # If the tetromino goes out then undo the move
-        if not self.tetromino_is_inside():              
+        # If the tetromino goes out or overlaps other tetromino then undo the move
+        if not self.tetromino_is_inside() or not self.tetromino_fits():              
             self.current_tetromino.move(Position(0, 1))
             
     
     def move_right(self):
         self.current_tetromino.move(Position(0, 1))
 
-        if not self.tetromino_is_inside():              
+        if not self.tetromino_is_inside() or not self.tetromino_fits():              
             self.current_tetromino.move(Position(0, -1))
     
     
     def move_down(self):
         self.current_tetromino.move(Position(1, 0))
 
-        if not self.tetromino_is_inside():              
+        if not self.tetromino_is_inside() or not self.tetromino_fits():              
             self.current_tetromino.move(Position(-1, 0))
+            self.lock_block()
 
 
     def rotate(self):
         self.current_tetromino.rotate()
 
-        if not self.tetromino_is_inside():
+        if not self.tetromino_is_inside() or not self.tetromino_fits():
             self.current_tetromino.undo_rotate()
+
+
+    # Disable the movement of tetromino when it reaches at the bottom and generates a new tetromino
+    def lock_block(self):
+        
+        positions =  self.current_tetromino.get_cell_positions()
+
+        # Changing the grid values
+        for position in positions:
+            self.grid.grid[position.row][position.column] = self.current_tetromino.id
+
+        # Updating the current and next tetromino
+        self.current_tetromino = self.next_tetromino
+        self.next_tetromino = self.get_random_tetromino()
+
+
+    # Method to check tetrominos overlapping
+    def tetromino_fits(self):
+        positions = self.current_tetromino.get_cell_positions()
+
+        for position in positions:
+            if not self.grid.is_empty(position):
+                return False
+            
+        return True
     
     
     # Calls all the necessary methods of the GameSurface class
