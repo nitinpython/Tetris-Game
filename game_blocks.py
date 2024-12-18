@@ -1,5 +1,5 @@
 from tetromino import Tetromino
-from pygame import Vector2
+from position import Position
 from settings import COLUMNS
 
 
@@ -8,10 +8,10 @@ class TBlock(Tetromino):
         super().__init__(id)
 
         self.blocks_positions = {
-            0: [Vector2(0, 1), Vector2(1, 0), Vector2(1, 1), Vector2(1, 2)],
-            1: [Vector2(0, 1), Vector2(1, 1), Vector2(1, 2), Vector2(2, 1)],
-            2: [Vector2(1, 0), Vector2(1, 1), Vector2(1, 2), Vector2(2, 1)],
-            3: [Vector2(0, 1), Vector2(1, 0), Vector2(1, 1), Vector2(2, 1)]
+            0: [Position(0, 1), Position(1, 0), Position(1, 1), Position(1, 2)],
+            1: [Position(0, 1), Position(1, 1), Position(1, 2), Position(2, 1)],
+            2: [Position(1, 0), Position(1, 1), Position(1, 2), Position(2, 1)],
+            3: [Position(0, 1), Position(1, 0), Position(1, 1), Position(2, 1)]
         }
 
         self.move()
@@ -22,10 +22,10 @@ class LBlock(Tetromino):
         super().__init__(id)
 
         self.blocks_positions = {
-            0: [Vector2(0, 2), Vector2(1, 0), Vector2(1, 1), Vector2(1, 2)],
-            1: [Vector2(0, 1), Vector2(1, 1), Vector2(2, 1), Vector2(2, 2)],
-            2: [Vector2(1, 0), Vector2(1, 1), Vector2(1, 2), Vector2(2, 0)],
-            3: [Vector2(0, 0), Vector2(0, 1), Vector2(1, 1), Vector2(2, 1)]
+            0: [Position(0, 2), Position(1, 0), Position(1, 1), Position(1, 2)],
+            1: [Position(0, 1), Position(1, 1), Position(2, 1), Position(2, 2)],
+            2: [Position(1, 0), Position(1, 1), Position(1, 2), Position(2, 0)],
+            3: [Position(0, 0), Position(0, 1), Position(1, 1), Position(2, 1)]
         }
 
         self.move()
@@ -36,10 +36,10 @@ class JBlock(Tetromino):
         super().__init__(id)
 
         self.blocks_positions = {
-            0: [Vector2(0, 0), Vector2(1, 0), Vector2(1, 1), Vector2(1, 2)],
-            1: [Vector2(0, 1), Vector2(0, 2), Vector2(1, 1), Vector2(2, 1)],
-            2: [Vector2(1, 0), Vector2(1, 1), Vector2(1, 2), Vector2(2, 2)],
-            3: [Vector2(0, 1), Vector2(1, 1), Vector2(2, 0), Vector2(2, 1)]
+            0: [Position(0, 0), Position(1, 0), Position(1, 1), Position(1, 2)],
+            1: [Position(0, 1), Position(0, 2), Position(1, 1), Position(2, 1)],
+            2: [Position(1, 0), Position(1, 1), Position(1, 2), Position(2, 2)],
+            3: [Position(0, 1), Position(1, 1), Position(2, 0), Position(2, 1)]
         }
 
         self.move()
@@ -50,10 +50,10 @@ class SBlock(Tetromino):
         super().__init__(id)
 
         self.blocks_positions = {
-            0: [Vector2(0, 1), Vector2(0, 2), Vector2(1, 0), Vector2(1, 1)],
-            1: [Vector2(0, 1), Vector2(1, 1), Vector2(1, 2), Vector2(2, 2)],
-            2: [Vector2(1, 1), Vector2(1, 2), Vector2(2, 0), Vector2(2, 1)],
-            3: [Vector2(0, 0), Vector2(1, 0), Vector2(1, 1), Vector2(2, 1)]
+            0: [Position(0, 1), Position(0, 2), Position(1, 0), Position(1, 1)],
+            1: [Position(0, 1), Position(1, 1), Position(1, 2), Position(2, 2)],
+            2: [Position(1, 1), Position(1, 2), Position(2, 0), Position(2, 1)],
+            3: [Position(0, 0), Position(1, 0), Position(1, 1), Position(2, 1)]
         }
 
         self.move()
@@ -64,10 +64,10 @@ class ZBlock(Tetromino):
         super().__init__(id)
 
         self.blocks_positions = {
-            0: [Vector2(0, 0), Vector2(0, 1), Vector2(1, 1), Vector2(1, 2)],
-            1: [Vector2(0, 2), Vector2(1, 1), Vector2(1, 2), Vector2(2, 1)],
-            2: [Vector2(1, 0), Vector2(1, 1), Vector2(2, 1), Vector2(2, 2)],
-            3: [Vector2(0, 1), Vector2(1, 0), Vector2(1, 1), Vector2(2, 0)]
+            0: [Position(0, 0), Position(0, 1), Position(1, 1), Position(1, 2)],
+            1: [Position(0, 2), Position(1, 1), Position(1, 2), Position(2, 1)],
+            2: [Position(1, 0), Position(1, 1), Position(2, 1), Position(2, 2)],
+            3: [Position(0, 1), Position(1, 0), Position(1, 1), Position(2, 0)]
         }
 
         self.move()
@@ -78,13 +78,13 @@ class IBlock(Tetromino):
         super().__init__(id)
 
         self.blocks_positions = {
-            0: [Vector2(1, 0), Vector2(1, 1), Vector2(1, 2), Vector2(1, 3)],
-            1: [Vector2(0, 2), Vector2(1, 2), Vector2(2, 2), Vector2(3, 2)],
-            2: [Vector2(2, 0), Vector2(2, 1), Vector2(2, 2), Vector2(2, 3)],
-            3: [Vector2(0, 1), Vector2(1, 1), Vector2(2, 1), Vector2(3, 1)]
+            0: [Position(1, 0), Position(1, 1), Position(1, 2), Position(1, 3)],
+            1: [Position(0, 2), Position(1, 2), Position(2, 2), Position(3, 2)],
+            2: [Position(2, 0), Position(2, 1), Position(2, 2), Position(2, 3)],
+            3: [Position(0, 1), Position(1, 1), Position(2, 1), Position(3, 1)]
         }
 
-        self.move((-1, COLUMNS//2 - 2))
+        self.move(Position(-1, COLUMNS//2 - 2))
 
 
 class OBlock(Tetromino):
@@ -92,7 +92,7 @@ class OBlock(Tetromino):
         super().__init__(id)
 
         self.blocks_positions = {
-            0: [Vector2(0, 0), Vector2(0, 1), Vector2(1, 0), Vector2(1, 1)]
+            0: [Position(0, 0), Position(0, 1), Position(1, 0), Position(1, 1)]
         }
 
         self.move()

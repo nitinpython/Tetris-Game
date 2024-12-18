@@ -1,5 +1,6 @@
 import pygame as pg
 from settings import *
+from position import Position
 
 
 # Game board
@@ -23,8 +24,8 @@ class Grid:
 
 
     # Check if a pos is inside the game surface
-    def is_inside(self, pos:pg.Vector2):
-        if pos.x < self.rows and pos.y in range(0, self.columns):
+    def is_inside(self, pos: Position):
+        if pos.row < self.rows and pos.column in range(0, self.columns):
             return True
         
         return False

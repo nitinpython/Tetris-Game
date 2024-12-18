@@ -3,6 +3,7 @@ from grid import Grid
 from settings import *
 from game_blocks import *
 from random import choice
+from position import Position
 
 
 # Game board logic
@@ -51,25 +52,25 @@ class GameSurface(Surface):
     # Methods to move the tetromino according to the user input
     
     def move_left(self):
-        self.current_tetromino.move((0, -1))
+        self.current_tetromino.move(Position(0, -1))
 
         # If the tetromino goes out then undo the move
         if not self.tetromino_is_inside():              
-            self.current_tetromino.move((0, 1))
+            self.current_tetromino.move(Position(0, 1))
             
     
     def move_right(self):
-        self.current_tetromino.move((0, 1))
+        self.current_tetromino.move(Position(0, 1))
 
         if not self.tetromino_is_inside():              
-            self.current_tetromino.move((0, -1))
+            self.current_tetromino.move(Position(0, -1))
     
     
     def move_down(self):
-        self.current_tetromino.move((1, 0))
+        self.current_tetromino.move(Position(1, 0))
 
         if not self.tetromino_is_inside():              
-            self.current_tetromino.move((-1, 0))
+            self.current_tetromino.move(Position(-1, 0))
 
 
     def rotate(self):
