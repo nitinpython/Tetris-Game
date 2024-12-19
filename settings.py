@@ -37,6 +37,15 @@ IMAGE_FILES = {
     'restart game': 'Images/restart game.png'
 }
 
+# Game sound files
+SOUND_FILES = {
+    'bgm': 'Sounds/bgm.mp3',
+    'move': 'Sounds/move.mp3',
+    'clear': 'Sounds/clear.mp3',
+    'game over': 'Sounds/game over.mp3'
+}
+
+
 # Menu button specifications
 OFFSET_X = 40
 RESUME_BUTTON_COORDINATES = (SCREEN_WIDTH//2 - OFFSET_X, SCREEN_HEIGHT//6)

@@ -4,6 +4,7 @@ from settings import *
 from game_blocks import *
 from random import choice
 from position import Position
+from pygame.mixer import Sound
 
 
 # Game board logic
@@ -93,11 +94,15 @@ class GameSurface(Surface):
         self.next_tetromino = self.get_random_tetromino()
 
         # Clear rows if full
-        self.grid.clear_full_rows()
+        rows_cleared = self.grid.clear_full_rows()
+
+        if rows_cleared:
+            self.play_sound(SOUND_FILES['clear'])
+
 
         # Game over if the block overlaps at the top
         if not self.tetromino_fits():
-            self.game_over = True
+            self.game_over()
 
 
     # Method to check tetrominos overlapping
@@ -109,6 +114,17 @@ class GameSurface(Surface):
                 return False
             
         return True
+    
+
+    def game_over(self):
+        self.game_over = True
+        self.play_sound(SOUND_FILES['game over'])
+
+    
+    @staticmethod
+    def play_sound(filename: str):
+        sound = Sound(filename)
+        sound.play()
     
     
     # Calls all the necessary methods of the GameSurface class

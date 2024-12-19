@@ -24,6 +24,9 @@ class Tetris:
         # Loading images
         self.IMAGES = self.load_images()
 
+        # Loading Background music
+        pg.mixer.music.load(SOUND_FILES['bgm'])
+
         # Creating Display surface (parent screen)
         self.SCREEN = pg.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
         pg.display.set_caption(CAPTION)
@@ -72,11 +75,30 @@ class Tetris:
 
     @staticmethod
     def button_clicked(button: pg.Rect):
+
         # Checking if the mouse is clicked while hovering on the button
         if button.collidepoint(pg.mouse.get_pos()) and pg.mouse.get_pressed()[0]:
+            
+            pg.mouse.set_cursor()           # Change the cursor back to default
             return True
         
         return False
+    
+
+    def resume_game(self):
+        self.playing = True
+        pg.mixer.music.unpause()                # Resume BGM
+
+
+    def restart_game(self):
+        self.__init__()
+        pg.mixer.music.play(-1)
+
+
+    @staticmethod
+    def play_sound(filename: str):
+        sound = pg.mixer.Sound(filename)
+        sound.play()
     
     
     def event_handler(self):
@@ -99,22 +121,29 @@ class Tetris:
                     
                     # Pause the game
                     if event.key == K_SPACE:
+                        self.play_sound(SOUND_FILES['move'])
                         self.playing = False
 
                     elif event.key == K_LEFT:
+                        self.play_sound(SOUND_FILES['move'])
                         self.game_surface.move_left()
                         
                     elif event.key == K_RIGHT:
+                        self.play_sound(SOUND_FILES['move'])
                         self.game_surface.move_right()
                         
                     elif event.key == K_DOWN:
+                        self.play_sound(SOUND_FILES['move'])
                         self.game_surface.move_down()
 
                     elif event.key == K_UP:
+                        self.play_sound(SOUND_FILES['move'])
                         self.game_surface.rotate()
 
  
     def run(self):
+
+        pg.mixer.music.play(-1)               # Play BGM
 
         while True:
 
@@ -131,15 +160,22 @@ class Tetris:
 
                 # If game over
                 if self.game_surface.game_over:
+
+                    pg.mixer.music.stop()           # Stop BGM
+
+                    # Blit restart button
                     restart_game_button = self.SCREEN.blit(self.IMAGES['restart game'], RESTART_BUTTON_COORDINATES)
                     
                     # Restart the game
                     if self.button_clicked(restart_game_button):
-                        self.__init__()
+                        self.restart_game()
+
 
             # Game paused
             else:
                 
+                pg.mixer.music.pause()              # Pause BGM
+
                 # Blit the menu buttons
                 resume_button = self.SCREEN.blit(self.IMAGES['resume'], RESUME_BUTTON_COORDINATES)
                 restart_button = self.SCREEN.blit(self.IMAGES['restart'], RESTART_BUTTON_COORDINATES)
@@ -149,10 +185,10 @@ class Tetris:
 
                 # Check which button is clicked and perform the action
                 if self.button_clicked(resume_button):
-                    self.playing = True                     # Resume game
+                    self.resume_game()
 
                 elif self.button_clicked(restart_button):
-                    self.__init__()                         # Restart game
+                    self.restart_game()
 
                 elif self.button_clicked(exit_button):
                     self.close_game_window()                # Close the game
