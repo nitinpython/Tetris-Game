@@ -87,8 +87,8 @@ class Tetris:
             if event.type == QUIT:
                 self.close_game_window()
 
-            # Check for user input only if the game is running
-            if self.playing:
+            # Check for user input only if the game is running and not over
+            if self.playing and not self.game_surface.game_over:
                 
                 # Control game speed through the game timer
                 if event.type == self.GAME_UPDATE:
@@ -128,6 +128,14 @@ class Tetris:
                 self.game_surface.run()
                 self.preview_surface.run()
                 self.score_surface.run()
+
+                # If game over
+                if self.game_surface.game_over:
+                    restart_game_button = self.SCREEN.blit(self.IMAGES['restart game'], RESTART_BUTTON_COORDINATES)
+                    
+                    # Restart the game
+                    if self.button_clicked(restart_game_button):
+                        self.__init__()
 
             # Game paused
             else:

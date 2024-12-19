@@ -20,6 +20,8 @@ class GameSurface(Surface):
         self.current_tetromino = self.get_random_tetromino()
         self.next_tetromino = self.get_random_tetromino()
 
+        self.game_over = False
+
 
     # Return a random tetromino block object from the tetrominos object list
     def get_random_tetromino(self):        
@@ -92,6 +94,10 @@ class GameSurface(Surface):
 
         # Clear rows if full
         self.grid.clear_full_rows()
+
+        # Game over if the block overlaps at the top
+        if not self.tetromino_fits():
+            self.game_over = True
 
 
     # Method to check tetrominos overlapping

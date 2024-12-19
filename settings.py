@@ -33,7 +33,8 @@ IMAGE_FILES = {
     'icon': 'Images/icon.png',
     'resume': 'Images/resume.png',
     'restart': 'Images/restart.png',
-    'exit': 'Images/exit.png'
+    'exit': 'Images/exit.png',
+    'restart game': 'Images/restart game.png'
 }
 
 # Menu button specifications
