@@ -102,7 +102,7 @@ class GameSurface(Surface):
 
         # Game over if the block overlaps at the top
         if not self.tetromino_fits():
-            self.game_over()
+            self.run_game_over()
 
 
     # Method to check tetrominos overlapping
@@ -116,7 +116,7 @@ class GameSurface(Surface):
         return True
     
 
-    def game_over(self):
+    def run_game_over(self):
         self.game_over = True
         self.play_sound(SOUND_FILES['game over'])
 
