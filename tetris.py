@@ -155,7 +155,7 @@ class Tetris:
 
             if self.playing:
                 self.game_surface.run()
-                self.preview_surface.run()
+                self.preview_surface.run(self.game_surface.next_tetromino)
                 self.score_surface.run()
 
                 # If game over
