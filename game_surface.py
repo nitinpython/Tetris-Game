@@ -23,6 +23,9 @@ class GameSurface(Surface):
 
         self.game_over = False
 
+        # Score
+        self.score = 0
+
 
     # Return a random tetromino block object from the tetrominos object list
     def get_random_tetromino(self):        
@@ -98,6 +101,7 @@ class GameSurface(Surface):
 
         if rows_cleared:
             self.play_sound(SOUND_FILES['clear'])
+            self.score += 100 * rows_cleared            # Change the score
 
 
         # Game over if the block overlaps at the top
